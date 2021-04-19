@@ -99,7 +99,7 @@ function match(){
 
 grid.addEventListener('click',function(event){
     let clicked = event.target
-    if (clicked.nodemane === 'SECTION'){
+    if (clicked.nodemane === 'SECTION' || clicked ===previousTarget){
         return
     }
     if(count < 2){
@@ -115,12 +115,27 @@ grid.addEventListener('click',function(event){
     if (firstGuess !=='' && secondGuess !== ''){
         if(firstGuess ===secondGuess){
             match()
+            resetGuess()
+        }
+        else{
+            resetGuess()
         }
         previousTarget = clicked;
     }
     clicked.classList.add('Selected')}
 })
 
+function resetGuess(){
+    firstGuess = ''
+    secondGuess = ''
+    count = 0;
+
+    var Selected = document.querySelectorAll('.Selected')
+    Selected.forEach((card)=>{
+        card.classList.remove('Selected')
+    })
+
+}
 
 
 
