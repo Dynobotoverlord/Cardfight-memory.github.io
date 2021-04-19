@@ -8,3 +8,27 @@ body{
 height: 100vh;
 background-image: url(/Images/background.jfif) 
 }
+
+.game-board{
+    width: 600px;
+    height: 600px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card{
+    border: 2px solid red;
+    width: 25%;
+    height: 33%;
+}
+
+.front{
+    position: absolute;
+    border: red solid;
+    height: 281px;
+    width: 200px;
+}
+.back{
+    position: absolute;
+    border: royalblue solid;
+}
