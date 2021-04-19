@@ -71,6 +71,16 @@ game.appendChild(grid)
 
 let gameGrid = cardArray.concat(cardArray)
 
+let firstGuess = ''
+let secondGuess = ''
+let previousTarget = null
+let count = 0
+
+gameGrid.sort(()=> 0.5 - Math.random())
+
+
+// 
+// 
 gameGrid.forEach((item)=>{
     const card = document.createElement('div')
     card.classList.add('card')
@@ -79,6 +89,40 @@ gameGrid.forEach((item)=>{
     grid.appendChild(card)
 })
 
-gameGrid.sort(()=> 0.5 - Math.random)
+function match(){
+    var Selected = document.querySelectorAll('.Selected');
+    Selected.forEach((card)=>{
+        card.classList.add('match')
+    })
+}
+
+
+grid.addEventListener('click',function(event){
+    let clicked = event.target
+    if (clicked.nodemane === 'SECTION'){
+        return
+    }
+    if(count < 2){
+        count++
+    if (count ===1){
+        firstGuess = clicked.dataset.name
+        clicked.classList.add('Selected')
+    }  
+    else{
+        secondGuess= clicked.dataset.name
+        clicked.classList.add('Selected')
+    }
+    if (firstGuess !=='' && secondGuess !== ''){
+        if(firstGuess ===secondGuess){
+            match()
+        }
+        previousTarget = clicked;
+    }
+    clicked.classList.add('Selected')}
+})
+
+
+
+
 
 
