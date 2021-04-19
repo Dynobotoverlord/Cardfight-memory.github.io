@@ -6,29 +6,39 @@
 
 body{
 height: 100vh;
+display: flex
 background-image: url(/Images/background.jfif) 
 }
 
 .game-board{
-    width: 600px;
-    height: 600px;
+    width: 640px;
+    height: 640px;
+    margin: auto;
     display: flex;
     flex-wrap: wrap;
+    border: lime solid 2px;
 }
 
 .card{
+    width: calc(25% -10px);
+    height: calc(33.33% - 10px);
     border: 2px solid red;
-    width: 25%;
-    height: 33%;
+    position: relative;
+    margin: 5px;
 }
 
 .front{
-    position: absolute;
-    border: red solid;
     height: 281px;
     width: 200px;
 }
-.back{
+
+.front .back{
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    border-radius: 5px;
     position: absolute;
-    border: royalblue solid;
+    border: 2px blue solid;
+    background: blue;
+
 }
