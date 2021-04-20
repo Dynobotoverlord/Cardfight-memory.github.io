@@ -1,143 +1,148 @@
-const cardArray = [
-    {
-        name : 'vairina',
-        img :'images/Varina.png',
+const cardsArray = [{
+    name : 'vairina',
+    img :'images/Varina.png',
+},
+{
+name : 'nirvana',
+img :'images/Nirvana.png',
+},
+
+{
+name : 'reiyu',
+img :'images/Reiyu.png',
+},
+
+{
+name : 'rino',
+img :'images/Rino.png',
+},
+
+{
+name : 'crit',
+img :'images/DragonCrit.png',
+},
+
+
+{
+name : 'heal',
+img :'images/DragonHeal.png',
+},
+
+{
+name : 'front',
+img :'images/DragonStand.png',
+},
+
+{
+name : 'inferno',
+img :'images/inferno.png',
+},
+
+{
+name : 'sunburst',
+img :'images/SunBurst.png',
+},
+
+{
+ name : 'stealth',
+ img :'images/Stealth.png',
+ },
+
+ {
+ name : 'anky',
+ img :'images/Anky.png',
     },
-    {
-    name : 'nirvana',
-    img :'images/Nirvana.png',
-    },
 
-    {
-    name : 'reiyu',
-    img :'images/Reiyu.png',
-    },
+{
+name : 'trickstar',
+img :'images/TrickStar.png',
 
-    {
-    name : 'rino',
-    img :'images/Rino.png',
-    },
-
-    {
-    name : 'crit',
-    img :'images/DragonCrit.png',
-    },
-
-
-    {
-    name : 'heal',
-    img :'images/DragonHeal.png',
-    },
-
-    {
-    name : 'front',
-    img :'images/DragonStand.png',
-    },
-
-    {
-    name : 'inferno',
-    img :'images/inferno.png',
-    },
-
-    {
-    name : 'sunburst',
-    img :'images/SunBurst.png',
-    },
-
-    {
-     name : 'stealth',
-     img :'images/Stealth.png',
-     },
-
-     {
-     name : 'anky',
-     img :'images/Anky.png',
-        },
-
-    {
-    name : 'trickstar',
-    img :'images/TrickStar.png',
-    
-    },
+},
 
 ]
 
-const game = document.getElementById('game')
+const gameGrid = cardsArray
+  .concat(cardsArray)
+  .sort(() => 0.5 - Math.random());
 
-const grid =document.createElement('section')
-grid.setAttribute('class','grid')
+let firstGuess = '';
+let secondGuess = '';
+let count = 0;
+let previousTarget = null;
+let delay = 1200;
 
-game.appendChild(grid)
+const game = document.getElementById('game');
+const grid = document.createElement('section');
+grid.setAttribute('class', 'grid');
+game.appendChild(grid);
 
-let gameGrid = cardArray.concat(cardArray)
+gameGrid.forEach(item => {
+  const { name, img } = item;
 
-let firstGuess = ''
-let secondGuess = ''
-let previousTarget = null
-let count = 0
+  const card = document.createElement('div');
+  card.classList.add('card');
+  card.dataset.name = name;
 
-gameGrid.sort(()=> 0.5 - Math.random())
+  const front = document.createElement('div');
+  front.classList.add('front');
 
+  const back = document.createElement('div');
+  back.classList.add('back');
+  back.style.backgroundImage = `url(${img})`;
 
-// 
-// 
-gameGrid.forEach((item)=>{
-    const card = document.createElement('div')
-    card.classList.add('card')
-    card.dataset.name = item.name
-    card.style.backgroundImage = `url(${item.img})`
-    grid.appendChild(card)
-})
+  grid.appendChild(card);
+  card.appendChild(front);
+  card.appendChild(back);
+});
 
-function match(){
-    var Selected = document.querySelectorAll('.Selected');
-    Selected.forEach((card)=>{
-        card.classList.add('match')
-    })
-}
+function match () {
+  const selected = document.querySelectorAll('.selected');
+  selected.forEach(card => {
+    card.classList.add('match');
+  });
+};
 
+function resetGuesses() {
+  firstGuess = '';
+  secondGuess = '';
+  count = 0;
+  previousTarget = null;
 
-grid.addEventListener('click',function(event){
-    let clicked = event.target
-    if (clicked.nodemane === 'SECTION' || clicked ===previousTarget){
-        return
+  var selected = document.querySelectorAll('.selected');
+  selected.forEach(card => {
+    card.classList.remove('selected');
+  });
+};
+
+grid.addEventListener('click', event => {
+
+  const clicked = event.target;
+
+  if (
+    clicked.nodeName === 'SECTION' ||clicked === previousTarget || clicked.parentNode.classList.contains('selected') ||clicked.parentNode.classList.contains('match')
+  ) {
+    return;
+  }
+
+  if (count < 2) {
+    count++;
+    if (count === 1) {
+      firstGuess = clicked.parentNode.dataset.name;
+      console.log(firstGuess);
+      clicked.parentNode.classList.add('selected');
+    } else {
+      secondGuess = clicked.parentNode.dataset.name;
+      console.log(secondGuess);
+      clicked.parentNode.classList.add('selected');
     }
-    if(count < 2){
-        count++
-    if (count ===1){
-        firstGuess = clicked.dataset.name
-        clicked.classList.add('Selected')
-    }  
-    else{
-        secondGuess= clicked.dataset.name
-        clicked.classList.add('Selected')
+
+    if (firstGuess && secondGuess) {
+      if (firstGuess === secondGuess) {
+        setTimeout(match, delay);
+      }
+      setTimeout(resetGuesses, delay);
     }
-    if (firstGuess !=='' && secondGuess !== ''){
-        if(firstGuess ===secondGuess){
-            match()
-            resetGuess()
-        }
-        else{
-            resetGuess()
-        }
-        previousTarget = clicked;
-    }
-    clicked.classList.add('Selected')}
-})
+    previousTarget = clicked;
+  }
 
-function resetGuess(){
-    firstGuess = ''
-    secondGuess = ''
-    count = 0;
-
-    var Selected = document.querySelectorAll('.Selected')
-    Selected.forEach((card)=>{
-        card.classList.remove('Selected')
-    })
-
-}
-
-
-
-
-
+});
