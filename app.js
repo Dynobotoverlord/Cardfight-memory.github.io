@@ -1,3 +1,5 @@
+
+//Array of cards that a function cycles through to pull the card info 
 const cardsArray = [{
     name : 'vairina',
     img :'images/Varina.png',
@@ -60,7 +62,7 @@ img :'images/TrickStar.png',
 },
 
 ]
-
+// randomizes the cards
 const gameGrid = cardsArray
   .concat(cardsArray)
   .sort(() => 0.5 - Math.random());
@@ -94,7 +96,7 @@ gameGrid.forEach(item => {
   card.appendChild(front);
   card.appendChild(back);
 });
-
+//matches the cards and be able to determine if  match was made
 function match () {
   const selected = document.querySelectorAll('.selected');
   selected.forEach(card => {
@@ -107,7 +109,7 @@ function wingame(){
       alert('you won congrats')
   }
 }
-
+// resets the number of guesses at 2 so the player cannot just click all over the board
 function resetGuesses() {
   firstGuess = '';
   secondGuess = '';
@@ -153,8 +155,8 @@ grid.addEventListener('click', event => {
   }
 
 });
-
-const startTime = 10;
+// count down timer
+const startTime = 80;
 let time = startTime * 60;
 
 const CountDown = document.getElementById('timer');
