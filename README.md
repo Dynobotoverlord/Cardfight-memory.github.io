@@ -7,7 +7,7 @@ problems that occured: couldnt get my win or lose alert to pop up when its suppo
 
 instructions 
  
- select a card then select another to see if its a katch 
+ select a card then select another to see if its a match 
  macth the cards as fast as possible 
  you win if you get all the cards as fast as possible
  you lose when the game will lock out after a certain amouunt of time 
