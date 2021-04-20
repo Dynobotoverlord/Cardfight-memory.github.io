@@ -102,11 +102,18 @@ function match () {
   });
 };
 
+function wingame(){
+  if (cardsArray.length === cardsArray.length){
+      alert('you won congrats')
+  }
+}
+
 function resetGuesses() {
   firstGuess = '';
   secondGuess = '';
   count = 0;
   previousTarget = null;
+  
 
   var selected = document.querySelectorAll('.selected');
   selected.forEach(card => {
@@ -146,3 +153,20 @@ grid.addEventListener('click', event => {
   }
 
 });
+
+const startTime = 10;
+let time = startTime * 60;
+
+const CountDown = document.getElementById('timer');
+
+setInterval(updateCountdown, 1000);
+function updateCountdown(){
+    const minutes = Math.floor(time/60)
+    let seconds = time % 60
+     seconds < 10 ? '0' + seconds : seconds;
+    CountDown.innerHTML = "Time Remaining: " + `${minutes}:${seconds}`;
+    time--;
+    time = time < 0 ?0:time;
+}
+
+

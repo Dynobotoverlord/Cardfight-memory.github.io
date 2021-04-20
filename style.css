@@ -7,7 +7,9 @@
 
 body {
   margin: 20px 0;
-  background: #6589F9;
+  background : url(/Images/Breaker.png) center center no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 
 .grid {
@@ -41,12 +43,11 @@ max-height:100vh;
 
 .front {
   z-index: 2;
-  background: #FAB942 url(/images/BackCard.Png) no-repeat center center / contain;
+  background: url(/images/BackCard.Png) no-repeat center center / contain;
 }
 
 .back {
   transform: rotateY(180deg);
-  background-color: #6589F9;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
@@ -57,5 +58,35 @@ max-height:100vh;
 }
 
 .match .front {
-  background: #6589F9 !important;
+  background:none !important;
+}
+
+timer{
+    font-size: 100%;
+}
+;
+
+.overlay-text {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  display: none;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #FF6D00;
+  font-family: Creepy, serif;
+  transition: background-color 500ms, font-size 500ms;
+}
+
+.overlay-text.visible {
+  display: flex;
+  animation: overlay-grow 500ms forwards;
+}
+
+.overlay-text-small {
+  font-size: .3em;
 }
